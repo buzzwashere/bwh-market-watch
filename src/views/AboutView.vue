@@ -23,8 +23,13 @@
         them.
       </li>
       <li>
-        Each chart covers 1 week, 30 days, or the last year, and history comes from Yahoo Finance.
-        The change beside it runs from the first point in the chart to the last.
+        Each chart covers today, 1 week, 30 days, or the last year, and history comes from Yahoo
+        Finance. The change beside it runs from the first point in the chart to the last.
+      </li>
+      <li>
+        Today charts the latest session, so its change starts at the open, not the previous close,
+        and can differ from the daily change above it. Crypto's starts at midnight UTC. When a
+        market has not traded today, the chart shows its last session and says which day that was.
       </li>
       <li>
         Total crypto market cap has no free history, so that card charts the Bitwise 10 Crypto Index

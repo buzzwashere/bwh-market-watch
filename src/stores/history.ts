@@ -4,6 +4,8 @@ import type { QuoteHistory, Timeframe } from '../../shared/market'
 
 const DEFAULT_TIMEFRAME: Timeframe = '30d'
 const MAX_AGE_MS = 5 * 60_000
+// Under the 60s quote poll, so an open session's chart updates on every poll.
+const TODAY_MAX_AGE_MS = 30_000
 
 export interface HistoryEntry {
   status: 'loading' | 'ready' | 'error'
@@ -32,7 +34,8 @@ export const useHistoryStore = defineStore('history', () => {
     const key = `${id}|${timeframe}`
     const current = entries.value[key]
     if (current?.status === 'loading') return
-    if (current?.status === 'ready' && Date.now() - current.fetchedAt < MAX_AGE_MS) return
+    const maxAge = timeframe === '1d' ? TODAY_MAX_AGE_MS : MAX_AGE_MS
+    if (current?.status === 'ready' && Date.now() - current.fetchedAt < maxAge) return
 
     // A background refresh keeps the drawn chart; only a first load shows the placeholder.
     const held = current?.history ?? null

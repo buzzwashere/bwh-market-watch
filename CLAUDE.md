@@ -26,7 +26,7 @@ Guidance for Claude Code when working in this repository.
 - `api/_market-core.ts`: instrument catalog, upstream fetches, 60s cache. Leading `_` keeps it from
   becoming a Vercel route.
 - `api/quotes.ts`: handler. `vite.config.ts` serves the same handler in dev through `devApi()`.
-- `api/history.ts`: per-instrument chart data (`?id=&timeframe=1w|30d|1y`), also from the core module.
+- `api/history.ts`: per-instrument chart data (`?id=&timeframe=1d|1w|30d|1y`), also from the core module.
 - `shared/market.ts`: types shared by the function and the client. Types only, so `api/` has no
   runtime dependency outside its own folder.
 - `src/stores/market.ts`: quotes, polling, per-card fallback to the last good value.

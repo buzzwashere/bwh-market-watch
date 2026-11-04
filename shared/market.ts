@@ -37,7 +37,7 @@ export interface MarketSnapshot {
   quotes: Quote[]
 }
 
-export type Timeframe = '1w' | '30d' | '1y'
+export type Timeframe = '1d' | '1w' | '30d' | '1y'
 
 export interface HistoryPoint {
   time: number

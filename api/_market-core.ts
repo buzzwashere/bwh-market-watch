@@ -255,8 +255,10 @@ export function hasAnyQuote(snapshot: MarketSnapshot): boolean {
 
 const HISTORY_WINDOWS: Record<
   Timeframe,
-  { days: number; interval: string; maxAgeSeconds: number }
+  // No day count means the latest session, which Yahoo works out per exchange.
+  { days: number | null; interval: string; maxAgeSeconds: number }
 > = {
+  '1d': { days: null, interval: '5m', maxAgeSeconds: 60 },
   '1w': { days: 7, interval: '1h', maxAgeSeconds: 300 },
   '30d': { days: 30, interval: '1d', maxAgeSeconds: 1800 },
   '1y': { days: 365, interval: '1d', maxAgeSeconds: 3600 },
@@ -294,9 +296,10 @@ async function fetchHistory(id: string, timeframe: Timeframe): Promise<QuoteHist
 
   const { days, interval } = HISTORY_WINDOWS[timeframe]
   const now = Math.floor(Date.now() / 1000)
+  const span = days === null ? 'range=1d' : `period1=${now - days * 86_400}&period2=${now}`
   const data = await fetchJson<YahooHistoryResponse>(
     `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(source.symbol)}` +
-      `?period1=${now - days * 86_400}&period2=${now}&interval=${interval}`,
+      `?${span}&interval=${interval}`,
   )
 
   const result = data.chart?.result?.[0]
@@ -312,7 +315,7 @@ async function fetchHistory(id: string, timeframe: Timeframe): Promise<QuoteHist
     id,
     timeframe,
     timeZone: result?.meta?.exchangeTimezoneName ?? 'UTC',
-    intraday: interval === '1h',
+    intraday: interval !== '1d',
     proxy: source.proxy,
     points,
   }
