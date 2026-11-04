@@ -1,0 +1,45 @@
+@import 'tailwindcss';
+
+@theme inline {
+  --color-page: var(--page);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-ink-secondary: var(--ink-secondary);
+  --color-ink-muted: var(--ink-muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-up: var(--up);
+  --color-down: var(--down);
+}
+
+/* Dark is the default; choosing light sets data-theme on <html>. */
+:root {
+  color-scheme: dark;
+  --page: #111110;
+  --surface: #1a1a19;
+  --ink: #f0efec;
+  --ink-secondary: #c3c2b7;
+  --ink-muted: #989690;
+  --line: #2c2c2a;
+  --accent: #86b6ef;
+  --up: #0ca30c;
+  --down: #f07a7a;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --page: #f4f3ef;
+  --surface: #fcfcfb;
+  --ink: #0b0b0b;
+  --ink-secondary: #52514e;
+  --ink-muted: #6b6a65;
+  --line: #e1e0d9;
+  --accent: #184f95;
+  --up: #006300;
+  --down: #b42b2b;
+}
+
+body {
+  background-color: var(--page);
+  color: var(--ink);
+}
