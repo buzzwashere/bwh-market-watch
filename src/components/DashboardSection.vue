@@ -4,12 +4,16 @@ import TimeframeControl from '@/components/TimeframeControl.vue'
 import { useHistoryStore } from '@/stores/history'
 import { useSectionsStore } from '@/stores/sections'
 
-const props = defineProps<{
-  title: string
-  note?: string
-  // The charts the header's timeframe control drives; none hides the control.
-  chartIds: string[]
-}>()
+const props = withDefaults(
+  defineProps<{
+    title: string
+    note?: string
+    // The charts the header's timeframe control drives. A section with other kinds of range
+    // (the Economy section) passes its own control in the `controls` slot instead.
+    chartIds?: string[]
+  }>(),
+  { chartIds: () => [] },
+)
 
 const historyStore = useHistoryStore()
 const sections = useSectionsStore()
@@ -53,14 +57,17 @@ const sharedTimeframe = computed(() => {
       </h2>
       <p v-if="note" class="text-sm text-ink-secondary">{{ note }}</p>
       <!-- Stays usable while collapsed, so the timeframe can be set before reopening. -->
-      <TimeframeControl
-        v-if="chartIds.length"
-        class="ml-auto"
-        spacious
-        :selected="sharedTimeframe"
-        :label="`Chart timeframe for every ${title} card`"
-        @select="historyStore.setTimeframes(chartIds, $event)"
-      />
+      <div class="ml-auto">
+        <slot name="controls">
+          <TimeframeControl
+            v-if="chartIds.length"
+            spacious
+            :selected="sharedTimeframe"
+            :label="`Chart timeframe for every ${title} card`"
+            @select="historyStore.setTimeframes(chartIds, $event)"
+          />
+        </slot>
+      </div>
     </div>
     <!-- v-show keeps the cards mounted, so their charts are ready when the section reopens. -->
     <div v-show="!collapsed" :id="contentId">

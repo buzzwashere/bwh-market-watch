@@ -1,6 +1,6 @@
 import { fileURLToPath, URL } from 'node:url'
 
-import { defineConfig, type Plugin } from 'vite'
+import { defineConfig, loadEnv, type Plugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import tailwindcss from '@tailwindcss/vite'
 import vueDevTools from 'vite-plugin-vue-devtools'
@@ -19,6 +19,14 @@ function devApi(): Plugin {
       server.middlewares.use('/api/history', async (req, res) => {
         const module = await server.ssrLoadModule('/api/history.ts')
         const { default: handler } = module as typeof import('./api/history.ts')
+        await handler(req, res)
+      })
+      // Vite only exposes VITE_ variables to the client; the server key comes from .env.local.
+      const env = loadEnv(server.config.mode, server.config.root, '')
+      if (env.FRED_API_KEY) process.env.FRED_API_KEY ??= env.FRED_API_KEY
+      server.middlewares.use('/api/economy', async (req, res) => {
+        const module = await server.ssrLoadModule('/api/economy.ts')
+        const { default: handler } = module as typeof import('./api/economy.ts')
         await handler(req, res)
       })
     },

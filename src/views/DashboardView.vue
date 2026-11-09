@@ -2,6 +2,7 @@
 import { onMounted, onUnmounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import DashboardSection from '@/components/DashboardSection.vue'
+import EconomySection from '@/components/EconomySection.vue'
 import QuoteSection from '@/components/QuoteSection.vue'
 import CryptoVsTechCard from '@/components/analysis/CryptoVsTechCard.vue'
 import DrawdownsCard from '@/components/analysis/DrawdownsCard.vue'
@@ -74,6 +75,7 @@ onUnmounted(market.stopPolling)
           <SixtyFortyCard />
         </div>
       </DashboardSection>
+      <EconomySection v-if="hasData" />
     </template>
   </div>
 </template>

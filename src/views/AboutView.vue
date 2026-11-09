@@ -9,6 +9,12 @@
     <ul class="flex list-disc flex-col gap-2 pl-5">
       <li>Stock indices, Treasury yields, and bond ETFs come from Yahoo Finance.</li>
       <li>Crypto prices and total market cap come from CoinGecko.</li>
+      <li>
+        Economic figures come from FRED, the St. Louis Fed's database, which republishes the
+        official releases from the Bureau of Labor Statistics, the Bureau of Economic Analysis, the
+        Federal Reserve, Freddie Mac and the University of Michigan. Most are monthly and can be
+        revised after first release.
+      </li>
     </ul>
     <h2 class="text-lg font-semibold">How to read the cards</h2>
     <ul class="flex list-disc flex-col gap-2 pl-5">

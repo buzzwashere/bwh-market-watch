@@ -48,6 +48,14 @@ Guidance for Claude Code when working in this repository.
   timeline (VIX), never two y-axes. Treasury yields stay out of price comparisons: they move
   opposite to bond prices.
 - `^VIX` and the eleven sector ETFs are history-only sources in `api/_market-core.ts`.
+- `api/economy.ts` + `api/_economy-core.ts`: twelve FRED series in one response, cached six
+  hours. FRED does the year-over-year maths (`units=pc1`). Needs the server-only `FRED_API_KEY`
+  (see `.env.example`); without it the endpoint answers 503 and the section says so. The dev
+  middleware loads it from `.env.local`. Error messages name the series, never the URL, which
+  carries the key.
+- `src/components/EconomySection.vue` + `EconomyCard.vue`, `src/stores/economy.ts`: the Economy
+  section, with its own 1/5/10-year ranges through `SegmentedControl` in the section header's
+  `controls` slot. Changes are shown in neutral ink: a rise in inflation is not a gain.
 - `src/views`: routed into `App.vue` between `AppBar` and `AppFooter`.
 
 ## Conventions
