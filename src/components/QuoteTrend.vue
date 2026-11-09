@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
-import type { AvailableQuote, Timeframe } from '../../shared/market'
+import type { AvailableQuote } from '../../shared/market'
+import TimeframeControl from '@/components/TimeframeControl.vue'
 import { useHistoryStore } from '@/stores/history'
 import { useMarketStore } from '@/stores/market'
 import {
@@ -12,13 +13,7 @@ import {
   moveClass,
   moveDirection,
 } from '@/utils/format'
-
-const TIMEFRAMES: Array<{ id: Timeframe; label: string; span: string }> = [
-  { id: '1d', label: 'Today', span: 'since open' },
-  { id: '1w', label: '1 week', span: 'past week' },
-  { id: '30d', label: '30 days', span: 'past 30 days' },
-  { id: '1y', label: 'Last year', span: 'past year' },
-]
+import { TIMEFRAMES } from '@/utils/timeframes'
 
 // Keeps the line and its end marker off the chart's edges.
 const Y_INSET = 8
@@ -174,22 +169,10 @@ const summary = computed(() => {
 
     <p v-if="history?.proxy" class="text-xs text-ink-muted">Chart shows {{ history.proxy }}</p>
 
-    <div
-      class="flex rounded-md bg-page p-0.5"
-      role="group"
-      :aria-label="`Chart timeframe for ${quote.name}`"
-    >
-      <button
-        v-for="option in TIMEFRAMES"
-        :key="option.id"
-        type="button"
-        class="flex-1 rounded px-0.5 py-1 text-xs whitespace-nowrap text-ink-secondary hover:text-ink"
-        :class="{ 'bg-surface font-medium !text-ink shadow-sm': option.id === timeframe }"
-        :aria-pressed="option.id === timeframe"
-        @click="historyStore.setTimeframe(quote.id, option.id)"
-      >
-        {{ option.label }}
-      </button>
-    </div>
+    <TimeframeControl
+      :selected="timeframe"
+      :label="`Chart timeframe for ${quote.name}`"
+      @select="historyStore.setTimeframe(quote.id, $event)"
+    />
   </div>
 </template>

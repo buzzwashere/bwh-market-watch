@@ -26,6 +26,10 @@ export const useHistoryStore = defineStore('history', () => {
     timeframes.value[id] = timeframe
   }
 
+  function setTimeframes(ids: string[], timeframe: Timeframe): void {
+    for (const id of ids) timeframes.value[id] = timeframe
+  }
+
   function entryFor(id: string, timeframe: Timeframe): HistoryEntry | undefined {
     return entries.value[`${id}|${timeframe}`]
   }
@@ -54,5 +58,5 @@ export const useHistoryStore = defineStore('history', () => {
     }
   }
 
-  return { timeframes, entries, timeframeFor, setTimeframe, entryFor, load }
+  return { timeframes, entries, timeframeFor, setTimeframe, setTimeframes, entryFor, load }
 })

@@ -34,6 +34,8 @@ Guidance for Claude Code when working in this repository.
 - `src/stores/theme.ts`: light/dark choice, saved in localStorage. Dark is the default whatever the
   system theme is; `src/style.css` holds both token sets.
 - `src/components/QuoteTrend.vue`: sparkline, hover readout, and timeframe control for one card.
+- `src/components/TimeframeControl.vue`: the timeframe buttons, used on each card and in each
+  section header, where a choice applies to every card in that section.
 - `src/views`: routed into `App.vue` between `AppBar` and `AppFooter`.
 
 ## Conventions
