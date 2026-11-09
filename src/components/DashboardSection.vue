@@ -56,8 +56,8 @@ const sharedTimeframe = computed(() => {
         </button>
       </h2>
       <p v-if="note" class="text-sm text-ink-secondary">{{ note }}</p>
-      <!-- Stays usable while collapsed, so the timeframe can be set before reopening. -->
-      <div class="ml-auto">
+      <!-- Hidden with the cards it drives; the chosen timeframe is kept for when it reopens. -->
+      <div v-show="!collapsed" class="ml-auto">
         <slot name="controls">
           <TimeframeControl
             v-if="chartIds.length"

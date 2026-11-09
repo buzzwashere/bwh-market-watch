@@ -70,7 +70,17 @@ const summary = computed(() => {
 
 <template>
   <article class="flex flex-col rounded-xl border border-line bg-surface p-4">
-    <h3 class="text-sm font-medium">{{ indicator.name }}</h3>
+    <h3 class="text-sm font-medium">
+      {{ indicator.name
+      }}<sup class="ml-0.5"
+        ><a
+          href="#fred-notice"
+          class="text-ink-muted hover:text-ink hover:underline"
+          aria-label="Footnote 1, FRED notice"
+          >1</a
+        ></sup
+      >
+    </h3>
     <p class="text-xs text-ink-muted">{{ indicator.detail }}</p>
 
     <template v-if="latest">

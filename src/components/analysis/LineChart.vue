@@ -82,9 +82,9 @@ function onPointer(event: PointerEvent): void {
           x2="100"
           :y1="y(baseline)"
           :y2="y(baseline)"
-          class="stroke-line"
+          class="stroke-ink-muted"
           stroke-width="1"
-          stroke-dasharray="3 3"
+          stroke-dasharray="4 3"
           vector-effect="non-scaling-stroke"
         />
         <polyline
