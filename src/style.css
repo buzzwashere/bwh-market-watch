@@ -10,8 +10,9 @@
   --color-accent: var(--accent);
   --color-up: var(--up);
   --color-down: var(--down);
-  --color-series-stocks: var(--series-stocks);
-  --color-series-bonds: var(--series-bonds);
+  --color-series-1: var(--series-1);
+  --color-series-2: var(--series-2);
+  --color-series-3: var(--series-3);
 }
 
 /* Dark is the default; choosing light sets data-theme on <html>. */
@@ -26,9 +27,10 @@
   --accent: #86b6ef;
   --up: #0ca30c;
   --down: #f07a7a;
-  /* Analysis lines: blue and orange pass the palette validator's CVD and contrast checks. */
-  --series-stocks: #3987e5;
-  --series-bonds: #d95926;
+  /* Analysis lines, in this order: they pass the palette validator's CVD checks as a set. */
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
 }
 
 :root[data-theme='light'] {
@@ -42,8 +44,10 @@
   --accent: #184f95;
   --up: #006300;
   --down: #b42b2b;
-  --series-stocks: #2a78d6;
-  --series-bonds: #eb6834;
+  /* series-3 is under 3:1 here, so every chart using it also has a labelled table. */
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
 }
 
 body {

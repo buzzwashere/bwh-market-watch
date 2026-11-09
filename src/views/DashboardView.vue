@@ -3,7 +3,15 @@ import { onMounted, onUnmounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import DashboardSection from '@/components/DashboardSection.vue'
 import QuoteSection from '@/components/QuoteSection.vue'
-import StocksVsBondsCard from '@/components/StocksVsBondsCard.vue'
+import CryptoVsTechCard from '@/components/analysis/CryptoVsTechCard.vue'
+import DrawdownsCard from '@/components/analysis/DrawdownsCard.vue'
+import GlobalEquitiesCard from '@/components/analysis/GlobalEquitiesCard.vue'
+import RiskAppetiteCard from '@/components/analysis/RiskAppetiteCard.vue'
+import SectorsCard from '@/components/analysis/SectorsCard.vue'
+import SixtyFortyCard from '@/components/analysis/SixtyFortyCard.vue'
+import StocksVsBondsCard from '@/components/analysis/StocksVsBondsCard.vue'
+import VolatilityCard from '@/components/analysis/VolatilityCard.vue'
+import YieldCurveCard from '@/components/analysis/YieldCurveCard.vue'
 import { useMarketStore } from '@/stores/market'
 import { ANALYSIS_CHART_IDS } from '@/utils/analysis'
 import { formatAsOf } from '@/utils/format'
@@ -56,6 +64,14 @@ onUnmounted(market.stopPolling)
       <DashboardSection v-if="hasData" title="Analysis" :chart-ids="ANALYSIS_CHART_IDS">
         <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           <StocksVsBondsCard />
+          <YieldCurveCard />
+          <GlobalEquitiesCard />
+          <RiskAppetiteCard />
+          <CryptoVsTechCard />
+          <DrawdownsCard />
+          <VolatilityCard />
+          <SectorsCard />
+          <SixtyFortyCard />
         </div>
       </DashboardSection>
     </template>

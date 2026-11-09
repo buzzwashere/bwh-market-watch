@@ -270,6 +270,21 @@ const HISTORY_SOURCES = new Map<string, { symbol: string; proxy: string | null }
   ),
   // Total market cap history is paid-only everywhere we looked, so an index ETF stands in.
   [TOTAL_CRYPTO_CAP.id, { symbol: 'BITW', proxy: 'BITW, Bitwise 10 Crypto Index ETF' }],
+  // History-only series for the Analysis cards: no quote card of their own.
+  ...[
+    ['vix', '^VIX'],
+    ['xlk', 'XLK'],
+    ['xlf', 'XLF'],
+    ['xlv', 'XLV'],
+    ['xle', 'XLE'],
+    ['xly', 'XLY'],
+    ['xlp', 'XLP'],
+    ['xli', 'XLI'],
+    ['xlb', 'XLB'],
+    ['xlu', 'XLU'],
+    ['xlre', 'XLRE'],
+    ['xlc', 'XLC'],
+  ].map(([id, symbol]) => [id!, { symbol: symbol!, proxy: null }] as const),
 ])
 
 export function isTimeframe(value: string | null): value is Timeframe {

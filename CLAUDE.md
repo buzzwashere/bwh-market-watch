@@ -38,9 +38,16 @@ Guidance for Claude Code when working in this repository.
   section header, where a choice applies to every card in that section.
 - `src/components/DashboardSection.vue`: a collapsible section (state in `src/stores/sections.ts`,
   saved in localStorage) whose header holds the title and the section-wide timeframe control.
-- `src/components/StocksVsBondsCard.vue`: the first Analysis card. It reuses the quote cards'
-  histories and plots each as percent change from its own start, so different scales share an
-  axis. Analysis chart ids live in `src/utils/analysis.ts`.
+- `src/components/analysis/`: the nine Analysis cards plus their shared parts (`AnalysisCard`,
+  `LineChart`, `BarList`, `SeriesTable`, `ChartState`). Cards get aligned data from
+  `src/composables/useSeriesHistories.ts`, which reuses the history store and lines series up by
+  trading day or intraday slot, carrying values over closed markets. Maths in
+  `src/utils/seriesMath.ts`; chart ids in `src/utils/analysis.ts`; line colours in
+  `src/utils/tones.ts` and `--series-1..3` in `src/style.css` (validated as a set).
+- Comparisons of different scales use percent change from the start, or stacked charts on one
+  timeline (VIX), never two y-axes. Treasury yields stay out of price comparisons: they move
+  opposite to bond prices.
+- `^VIX` and the eleven sector ETFs are history-only sources in `api/_market-core.ts`.
 - `src/views`: routed into `App.vue` between `AppBar` and `AppFooter`.
 
 ## Conventions
