@@ -38,6 +38,10 @@ export function formatValue(quote: AvailableQuote): string {
   return formatAmount(quote.kind, quote.value)
 }
 
+export function formatSignedPercent(value: number): string {
+  return `${signed(value, 2)}%`
+}
+
 export function formatPeriodChange(kind: QuoteKind, first: number, last: number): string {
   if (kind === 'yield') return `${signed((last - first) * 100, 1)} bp`
   return `${signed(((last - first) / first) * 100, 2)}%`

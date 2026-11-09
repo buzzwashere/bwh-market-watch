@@ -10,6 +10,8 @@
   --color-accent: var(--accent);
   --color-up: var(--up);
   --color-down: var(--down);
+  --color-series-stocks: var(--series-stocks);
+  --color-series-bonds: var(--series-bonds);
 }
 
 /* Dark is the default; choosing light sets data-theme on <html>. */
@@ -24,6 +26,9 @@
   --accent: #86b6ef;
   --up: #0ca30c;
   --down: #f07a7a;
+  /* Analysis lines: blue and orange pass the palette validator's CVD and contrast checks. */
+  --series-stocks: #3987e5;
+  --series-bonds: #d95926;
 }
 
 :root[data-theme='light'] {
@@ -37,6 +42,8 @@
   --accent: #184f95;
   --up: #006300;
   --down: #b42b2b;
+  --series-stocks: #2a78d6;
+  --series-bonds: #eb6834;
 }
 
 body {

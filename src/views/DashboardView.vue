@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue'
 import { storeToRefs } from 'pinia'
+import DashboardSection from '@/components/DashboardSection.vue'
 import QuoteSection from '@/components/QuoteSection.vue'
+import StocksVsBondsCard from '@/components/StocksVsBondsCard.vue'
 import { useMarketStore } from '@/stores/market'
+import { ANALYSIS_CHART_IDS } from '@/utils/analysis'
 import { formatAsOf } from '@/utils/format'
 
 const market = useMarketStore()
@@ -50,6 +53,11 @@ onUnmounted(market.stopPolling)
         :placeholder-count="8"
       />
       <QuoteSection title="Crypto" :quotes="market.quotesFor('crypto')" :placeholder-count="4" />
+      <DashboardSection v-if="hasData" title="Analysis" :chart-ids="ANALYSIS_CHART_IDS">
+        <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <StocksVsBondsCard />
+        </div>
+      </DashboardSection>
     </template>
   </div>
 </template>

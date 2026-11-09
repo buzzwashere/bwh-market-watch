@@ -36,6 +36,11 @@ Guidance for Claude Code when working in this repository.
 - `src/components/QuoteTrend.vue`: sparkline, hover readout, and timeframe control for one card.
 - `src/components/TimeframeControl.vue`: the timeframe buttons, used on each card and in each
   section header, where a choice applies to every card in that section.
+- `src/components/DashboardSection.vue`: a collapsible section (state in `src/stores/sections.ts`,
+  saved in localStorage) whose header holds the title and the section-wide timeframe control.
+- `src/components/StocksVsBondsCard.vue`: the first Analysis card. It reuses the quote cards'
+  histories and plots each as percent change from its own start, so different scales share an
+  axis. Analysis chart ids live in `src/utils/analysis.ts`.
 - `src/views`: routed into `App.vue` between `AppBar` and `AppFooter`.
 
 ## Conventions
