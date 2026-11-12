@@ -10,4 +10,6 @@ const app = createApp(App)
 app.use(createPinia())
 app.use(router)
 
-app.mount('#app')
+// Mount once the first route has resolved. Mounted earlier, the Analytics component
+// sees the router's starting `/` and records a view of it before the real page.
+router.isReady().then(() => app.mount('#app'))

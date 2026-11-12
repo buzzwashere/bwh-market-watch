@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
+import { Analytics } from '@vercel/analytics/vue'
 import AppBar from '@/components/AppBar.vue'
 import AppFooter from '@/components/AppFooter.vue'
 </script>
@@ -11,5 +12,8 @@ import AppFooter from '@/components/AppFooter.vue'
       <RouterView />
     </main>
     <AppFooter />
+    <!-- Vercel Web Analytics: page views, including router navigations. Reports only
+         from the deployed site, once Analytics is enabled in the Vercel dashboard. -->
+    <Analytics />
   </div>
 </template>
